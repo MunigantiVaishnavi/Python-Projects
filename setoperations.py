@@ -1,0 +1,10 @@
+E={8,0,6,2,4}
+N={1,2,3,4,5}
+Union=E.union(N)
+print(Union)
+Intersection=E.intersection(N)
+print(Intersection)
+Difference=E.difference(N)
+print(Difference)
+Symmetric_difference=E.symmetric_difference(N)
+print(Symmetric_difference)
