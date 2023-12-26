@@ -14,7 +14,7 @@ a=data.iloc[3,1:].values
 a=a.reshape(28,28).astype('uint8')
 plt.imshow(a)
 #preparing the data
-#aeparating labels and data values
+#separating labels and data values
 df_x=data.iloc[:,1:]
 df_y=data.iloc[:,0]
 #creating test and train sizes
@@ -26,6 +26,7 @@ rf=RandomForestClassifier(n_estimators=100)
 #fit the model
 rf.fit(x_train, y_train)
 #prediction on test data
+pred=rf.predict(x_test)
 pred
 #check prediction accuracy
 s=y_test.values
@@ -39,5 +40,3 @@ count
 len(pred)
 #acuuracy value
 pred/count
-
-pred=rf.predict(x_test) 
