@@ -24,7 +24,7 @@ y_train.head()
 #callig rf classifier
 rf=RandomForestClassifier(n_estimators=100)
 #fit the model
-rf.fit(x_train. y_train)
+rf.fit(x_train, y_train)
 #prediction on test data
 pred
 #check prediction accuracy
