@@ -14,11 +14,12 @@ from keras.callbacks import ModelCheckpoint
 file=open("frankenstein-2.txt").read()
 
 #tokenization and standardization
+stop_words = set(stopwords.words('english'))  # Precompute stopwords for performance
 def tokenize_words(input):
     input = input.lower()
     tokenizer = RegexpTokenizer(r'\w+')
     tokens = tokenizer.tokenize(input)
-    filtered = filter(lambda token: token not in stopwords.words('english'), tokens)
+    filtered = [token for token in tokens if token not in stop_words]
     return " ".join(filtered)
 
 processed_input = tokenize_words(file)
@@ -80,7 +81,6 @@ model.fit(X, y, epochs=4, batch_size=256, callbacks=desired_callbacks)
 #recompile model with the saved weights
 filename = 'model_weights_saved.hdf5'
 model.load_weights(filename)
-model.compile(loss='categorical_crossentropy', optimizer='adam')
 
 #output of the model back into characters
 num_to_char = dict((i, c) for i, c in enumerate(chars))
@@ -100,4 +100,4 @@ for i in range(1000):
     result = num_to_char[index]
     sys.stdout.write(result)
     pattern.append(index)
-    pattern = pattern[1:len(pattern)]
+    pattern = pattern[1:len(pattern)]  # Keep the pattern length constant
