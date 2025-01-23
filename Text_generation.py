@@ -11,30 +11,45 @@ from keras.utils import np_utils
 from keras.callbacks import ModelCheckpoint
 
 #load data
+#loading data and opening our input data in the form of a text file
+#project gutenburg/berg is where the data can be found(google it)
 file=open("frankenstein-2.txt").read()
 
 #tokenization and standardization
+#what is tokenization? it is the process of breaking a stream of text up into words phrases symbols or other meaningful elements
 stop_words = set(stopwords.words('english'))  # Precompute stopwords for performance
 def tokenize_words(input):
+    #lowercase everything to standaridize it
     input = input.lower()
+    #instantiating the tokenizer
     tokenizer = RegexpTokenizer(r'\w+')
+    #tokenizing the text into tokens
     tokens = tokenizer.tokenize(input)
+    #filtering the stopwords using lambda
     filtered = [token for token in tokens if token not in stop_words]
     return " ".join(filtered)
 
+#preprocess the input datamake tokens
 processed_input = tokenize_words(file)
 
 #chars to numbers
+#convert characters in our input to numbers
+#we will sort the list of the set of all characters that appear in out i/p text and then use the enumerate fn to get numbers that represent the characters
+#we will then create a dictionary that stores the keys and values, or the characters and the numbers that represent them
 chars = sorted(list(set(processed_input)))  # Corrected the variable name
 char_to_num = dict((c, i) for i, c in enumerate(chars))
 
 #check if words to chars or chars to num (?!) has worked?
+#just so we get an idea of whether our process of coverting words to characters has worked
+#we print the length of our variables
 input_len = len(processed_input)
 vocal_len = len(chars)  # Changed to vocal_len
 print("total number of characters:", input_len)
 print("total vocab:", vocal_len)
 
 #seq length
+#we are defining how log we want an individual sequence  here
+#an individual sequence is a complete mapping of input characters as integers 
 seq_length = 100  # Fixed seq_length assignment
 x_data = []
 y_data = []
