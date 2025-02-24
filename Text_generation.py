@@ -13,7 +13,7 @@ from keras.callbacks import ModelCheckpoint
 #load data
 #loading data and opening our input data in the form of a text file
 #project gutenburg/berg is where the data can be found(google it)
-file=open("frankenstein-2.txt").read()
+file=open("Shelley-1818 Frankenstein.txt").read()
 
 #tokenization and standardization
 #what is tokenization? it is the process of breaking a stream of text up into words phrases symbols or other meaningful elements
